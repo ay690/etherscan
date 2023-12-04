@@ -77,7 +77,7 @@ const Statbox = () => {
                 <p className="font-bold text-gray-500">
                   Average Transaction Value
                 </p>
-                <img src={Chart} alt="Chart" className="w-full pt-1" />
+                <img src={ChartSvg} alt="Chart" className="w-full pt-1" />
               </section>
             </section>
           </section>
