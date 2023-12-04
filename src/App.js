@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import { Chart, ChartSvg } from "./assests";
-import { Header, Header2, Search } from "./components";
+import { Header, Header2, Search, Statbox } from "./components";
 import "./App.css";
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Header />
       <Header2 />
       <Search />
+      <Statbox />
     </>
   );
 }
