@@ -2,7 +2,7 @@ import { useEffect, useContext } from "react";
 import { Chart, ChartSvg } from "./assests";
 import { Header, Header2, Search, Statbox } from "./components";
 import "./App.css";
-import { DataContext } from "./components/DataContext";
+import { DataContext } from "./context/DataContext";
 
 
 function App() {
