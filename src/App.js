@@ -10,7 +10,8 @@ import {
   Block,
   Blocks,
   Transaction,
-  Transactions
+  Transactions,
+  Footer,
 } from "./components";
 import "./App.css";
 import { DataContext } from "./context/DataContext";
@@ -30,9 +31,8 @@ function App() {
     <>
       <Header />
       <Header2 />
-     
       <Routes>
-      <Route
+        <Route
           path="/"
           element={
             <>
@@ -49,6 +49,7 @@ function App() {
         <Route path="/tx/:hash" element={<Transaction />} />
         <Route path="/address/:address" element={<AddressDetails />} />
       </Routes>
+      <Footer />
     </>
   );
 }

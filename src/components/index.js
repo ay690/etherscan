@@ -8,5 +8,6 @@ import Block from "./Block";
 import Blocks from "./Blocks";
 import Transaction from "./Transaction";
 import Transactions from "./Transactions";
+import Footer from "./Footer";
 
-export { Header, Header2, Search, Statbox, Main, Block, Blocks, Transaction, Transactions, AddressDetails };
+export { Header, Header2, Search, Statbox, Main, Block, Blocks, Transaction, Transactions, AddressDetails, Footer };
