@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { SearchSectionImage } from "../assests";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Search = () => {
+  const [address, setAddress] = useState("");
+  const navigate = useNavigate();
+
+  function handleOnSubmit(event) {
+    event.preventDefault();
+    
+    // * if it is not the similar path only then navigate to a new path. It helps to prevent duplicate paths.
+    if (address && !window.location.pathname.includes(`/address/${address}`)) {
+      navigate(`/address/${address}`);
+    }
+    setAddress("");
+  }
+  
   const isSmallOrMediumScreen = () => window.innerWidth <= 768;
+
   return (
     <div
       className="w-[100vw] h-[400px] bg-[#142f74] border-b px-20 shadow-lg bg-cover bg-no-repeat"
@@ -24,6 +39,7 @@ const Search = () => {
             The Ethereum Blockchain Explorer
           </h1>
           <form
+            onSubmit={handleOnSubmit}
             className={`w-full max-w-[600px] ${
               isSmallOrMediumScreen() ? "text-sm" : ""
             }`}
@@ -34,7 +50,10 @@ const Search = () => {
                 id="default-search"
                 className="block w-full p-3 pl-5 mb-2 text-gray-900 truncate border border-gray-300 rounded-lg outline-none bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search by Address / Txn Hash / Block / Token / Domain Name"
-                required
+                value={address}
+                onChange={(event) => {
+                  setAddress(event.target.value);
+                }}
               />
               <button
                 type="submit"
