@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Logo, hamburgerMenu, close } from "../assests";
 import { FaAngleDown } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Header2 = () => {
   const [toggle, setToggle] = useState(false);
@@ -12,11 +13,14 @@ const Header2 = () => {
   return (
     <div className="w-full h-[70px] bg-white border-b px-10">
       <div className="md:max-w-[1480px] max-w-[600px] m-auto h-full w-full flex justify-between items-center gap-4">
-        <div className="flex justify-center items-center gap-2">
+        <Link to={"/"}>
+          
+        <div className="flex items-center justify-center gap-2">
           <img src={Logo} alt="Logo" className="h-[25px]" />
           <p className="text text-[#343e5c] font-bold text-[20px]">Etherscan</p>
         </div>
-        <div className="hidden md:flex items-center gap-3">
+        </Link>
+        <div className="items-center hidden gap-3 md:flex">
           <ul className="flex gap-4">
             <li className="flex items-center justify-center gap-1 hover:text-[#0784C3] cursor-pointer">
               Home{" "}
@@ -68,30 +72,30 @@ const Header2 = () => {
         }
       >
         <ul>
-          <li className="flex items-center justify-center gap-1 p-4 hover:bg-gray-100 flex justify-center items-center cursor-pointer">
+          <li className="flex items-center justify-center gap-1 p-4 cursor-pointer hover:bg-gray-100">
             Home
           </li>
-          <li className="flex items-center justify-center gap-1 p-4 hover:bg-gray-100 flex justify-center items-center cursor-pointer">
+          <li className="flex items-center justify-center gap-1 p-4 cursor-pointer hover:bg-gray-100">
             Blockchain
             <FaAngleDown size={10} />
           </li>
-          <li className="flex items-center justify-center gap-1 p-4 hover:bg-gray-100 flex justify-center items-center cursor-pointer">
+          <li className="flex items-center justify-center gap-1 p-4 cursor-pointer hover:bg-gray-100">
             NFTs
             <FaAngleDown size={10} />
           </li>
-          <li className="flex items-center justify-center gap-1 p-4 hover:bg-gray-100 flex justify-center items-center cursor-pointer">
+          <li className="flex items-center justify-center gap-1 p-4 cursor-pointer hover:bg-gray-100">
             Resources
             <FaAngleDown size={10} />
           </li>
-          <li className="flex items-center justify-center gap-1 p-4 hover:bg-gray-100 flex justify-center items-center cursor-pointer">
+          <li className="flex items-center justify-center gap-1 p-4 cursor-pointer hover:bg-gray-100">
             Developers
             <FaAngleDown size={10} />
           </li>
-          <li className="flex items-center justify-center gap-1 p-4 hover:bg-gray-100 flex justify-center items-center cursor-pointer">
+          <li className="flex items-center justify-center gap-1 p-4 cursor-pointer hover:bg-gray-100">
             More
             <FaAngleDown size={10} />
           </li>
-          <div className="flex flex-col my-4 gap-4">
+          <div className="flex flex-col gap-4 my-4">
             <button className="bg-[#fffff] px-8 py-5 rounded-md text-black font-semibold cursor-pointer">
               Sign Up
             </button>
