@@ -54,7 +54,7 @@ function Transaction() {
                                 </Link>
                             </p>
                             <p className="py-6">
-                                {info.gasUsed.toString()} | 21000{" "}
+                                {info.gasUsed.toString()}
                             </p>
                             <p className="py-6">
                                 {info.effectiveGasPrice.toString() / 1000000000}{" "}

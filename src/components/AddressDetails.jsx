@@ -55,7 +55,7 @@ function AddressDetails() {
                   <Link to={`/tx/${tx.hash}`}>{tx.hash.slice(0, 16)}...</Link>
                 </p>
                 <p className="w-1/12">{Number(tx.blockNum)}</p>
-                <p className="w-3/12">{tx.metadata.blockTimestamp}</p>
+                <p className="w-3/12">{moment(tx.metadata.blockTimestamp, "YYYYMMDD").fromNow()}</p>
                 <p className="w-2/12">{tx.from.slice(0, 16)}...</p>
                 <p className="w-2/12 text-[#357BAD]">
                   <Link to={`/address/${tx.to}`}>{tx.to.slice(0, 16)}...</Link>

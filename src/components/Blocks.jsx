@@ -8,12 +8,17 @@ function Blocks() {
   const [formattedBlocks, setFormattedBlocks] = useState([]);
 
   const blocks = blocksData.map((blockData, index) => {
+    // const timestamp = moment(blockData.timestamp).valueOf();
+    // const age = moment(timestamp).fromNow();
+    const timestamp = moment(blockData.timestamp * 1000); // Convert to milliseconds
+    const formattedTimestamp = timestamp.format('LLL'); // Format timestamp in "LLL" format
+    const age = timestamp.fromNow();
     return (
       <div key={index} className="flex py-4">
         <p className="w-2/12 text-[#357BAD]">
           <Link to={`/block/${blockData.number}`}>{blockData.number}</Link>
         </p>
-        <p className="w-2/12">{blockData.timestamp}</p>
+        <p className="w-2/12">{age}</p>
         <p className="w-1/12 text-[#357BAD]">
           <Link to={`/txs?block=${blockData.number}`}>
             {blockData.transactions.length}

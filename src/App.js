@@ -23,8 +23,8 @@ function App() {
 
   useEffect(() => {
     getBlockInformation();
-    // console.log("blocksData:", blocksData);
-    // console.log("transactions:", transactions);
+    console.log("blocksData:", blocksData);
+    console.log("transactions:", transactions);
   }, []);
 
   return (
