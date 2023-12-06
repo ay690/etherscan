@@ -1,8 +1,6 @@
 # Etherscan clone
 
-<video>
-<source src="./img//fullVideo.mp4" alt="video.mp" />
-</video>
+https://youtu.be/qi0HoCDhCbk
 
 # Snippets
 
