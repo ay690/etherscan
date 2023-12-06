@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Logo, hamburgerMenu, close } from "../assests";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
+import { WagmiConfig } from "wagmi";
+import { arbitrum, mainnet } from "viem/chains";
 
 const Header2 = () => {
   const [toggle, setToggle] = useState(false);
@@ -10,15 +13,35 @@ const Header2 = () => {
     setToggle(!toggle);
   };
 
+  const projectId = process.env.REACT_APP_PROJECT_ID;
+
+  if (!projectId) {
+    console.error("Please enter your projectID");
+  }
+
+  const metadata = {
+    name: "Web3Modal",
+    description: "Web3Modal Example",
+    url: "https://web3modal.com",
+    icons: ["https://avatars.githubusercontent.com/u/37784886"],
+  };
+
+  const chains = [mainnet, arbitrum];
+  const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
+
+  // 3. Create modal
+  createWeb3Modal({ wagmiConfig, projectId, chains });
+
   return (
     <div className="w-full h-[70px] bg-white border-b px-10">
       <div className="md:max-w-[1480px] max-w-[600px] m-auto h-full w-full flex justify-between items-center gap-4">
         <Link to={"/"}>
-          
-        <div className="flex items-center justify-center gap-2">
-          <img src={Logo} alt="Logo" className="h-[25px]" />
-          <p className="text text-[#343e5c] font-bold text-[20px]">Etherscan</p>
-        </div>
+          <div className="flex items-center justify-center gap-2">
+            <img src={Logo} alt="Logo" className="h-[25px]" />
+            <p className="text text-[#343e5c] font-bold text-[20px]">
+              Etherscan
+            </p>
+          </div>
         </Link>
         <div className="items-center hidden gap-3 md:flex">
           <ul className="flex gap-4">
@@ -49,9 +72,13 @@ const Header2 = () => {
               Sign Up
             </button>
 
-            <button className="hover:bg-[#4daddd] bg-[#0784C3] px-8 py-3 rounded-md text-black text-sm font-semibold cursor-pointer">
+            {/* <button className="hover:bg-[#4daddd] bg-[#0784C3] px-8 py-3 rounded-md text-black text-sm font-semibold cursor-pointer">
               CONNECT
-            </button>
+            </button> */}
+
+            <WagmiConfig config={wagmiConfig}>
+              <w3m-button />
+            </WagmiConfig>
           </div>
         </div>
 
@@ -100,9 +127,14 @@ const Header2 = () => {
               Sign Up
             </button>
 
-            <button className="bg-[#0784C3] px-8 py-5 rounded-md text-black font-semibold cursor-pointer">
+            {/* <button className="bg-[#0784C3] px-8 py-5 rounded-md text-black font-semibold cursor-pointer">
               CONNECT
-            </button>
+            </button> */}
+            <WagmiConfig config={wagmiConfig}>
+              <div className="flex items-center justify-center">
+                <w3m-button />
+              </div>
+            </WagmiConfig>
           </div>
         </ul>
       </div>
