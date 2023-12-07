@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Logo, hamburgerMenu, close } from "../assests";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
-import { WagmiConfig } from "wagmi";
-import { arbitrum, mainnet } from "viem/chains";
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Web3Modal, Web3Button } from '@web3modal/react'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'viem/chains'
 
 const Header2 = () => {
   const [toggle, setToggle] = useState(false);
@@ -13,24 +14,18 @@ const Header2 = () => {
     setToggle(!toggle);
   };
 
+  const chains = [arbitrum, mainnet, polygon]
   const projectId = process.env.REACT_APP_PROJECT_ID;
 
-  if (!projectId) {
-    console.error("Please enter your projectID");
-  }
+  const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+  const wagmiConfig = createConfig({
+    autoConnect: true,
+    connectors: w3mConnectors({ projectId, chains }),
+    publicClient
+  })
+  const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
-  const metadata = {
-    name: "Web3Modal",
-    description: "Web3Modal Example",
-    url: "https://web3modal.com",
-    icons: ["https://avatars.githubusercontent.com/u/37784886"],
-  };
-
-  const chains = [mainnet, arbitrum];
-  const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
-
-  // 3. Create modal
-  createWeb3Modal({ wagmiConfig, projectId, chains });
+  
 
   return (
     <div className="w-full h-[70px] bg-white border-b px-10">
@@ -77,8 +72,10 @@ const Header2 = () => {
             </button> */}
 
             <WagmiConfig config={wagmiConfig}>
-              <w3m-button />
+              <Web3Button />
             </WagmiConfig>
+
+            <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
           </div>
         </div>
 
@@ -132,9 +129,11 @@ const Header2 = () => {
             </button> */}
             <WagmiConfig config={wagmiConfig}>
               <div className="flex items-center justify-center">
-                <w3m-button />
+                <Web3Button />
               </div>
             </WagmiConfig>
+
+            <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
           </div>
         </ul>
       </div>

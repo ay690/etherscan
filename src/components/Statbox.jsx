@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChartSvg, Chart } from "../assests";
 import {
   faCube,
@@ -9,8 +9,26 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaEthereum } from "react-icons/fa";
+import axios from "axios";
 
 const Statbox = () => {
+  const [ethPrice, setEthPrice] = useState(null);
+  useEffect(() => {
+    const fetchEthPrice = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`
+        );
+        console.log(response.data)
+        setEthPrice(response.data.ethereum.usd);
+      } catch (error) {
+        console.error("Error fetching ETH price:", error);
+      }
+    };
+
+    fetchEthPrice();
+  }, []);
+
   return (
     <div className="w-full py-32">
       <div className="md:max-w-[1480px] m-auto max-w-[600px] px-4 md:px-0">
@@ -23,7 +41,7 @@ const Statbox = () => {
                 </section>
                 <section className="flex flex-col">
                   <p>ETHER PRICE</p>
-                  <p className="text-gray-500">$2155.49</p>
+                  <p className="text-gray-500">${ethPrice}</p>
                 </section>
               </section>
               <span className="border-b border-[#222222] w-full"></span>

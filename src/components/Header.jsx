@@ -1,35 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PiGasPumpLight } from "react-icons/pi";
 import { BsBrightnessLow } from "react-icons/bs";
 import { FaEthereum } from "react-icons/fa";
+import axios from "axios";
 
 const Header = () => {
+  const [ethPrice, setEthPrice] = useState(null);
+  const [gasPrice, setGasPrice] = useState(null);
+  
+  useEffect(() => {
+    const fetchEthPrice = async () => {
+      try {
+        const ethResponse = await axios.get(
+          "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
+        );
+        setEthPrice(ethResponse.data.ethereum.usd);
+      } catch (error) {
+        console.error("Error fetching ETH price:", error);
+      }
+    };
+
+    fetchEthPrice();
+
+  }, []);
+
   return (
     <div className="w-full h-[50px] bg-white border-b px-10 shadow-lg hidden sm:flex">
       <div className="md:max-w-[1480px] max-w-[600px] m-auto h-full w-full flex justify-between items-center">
-        <div className="flex gap-2 items-center justify-center">
-          <p className="text text-gray-400 hidden sm:block">
+        <div className="flex items-center justify-center gap-2">
+          <p className="hidden text-gray-400 text sm:block">
             ETH Price:{" "}
             <a href="#" className="text text-[#0784C3]">
-              $2,155.49{" "}
-              <a href="#" className="text text-[#008186]">
-                (+2.69%)
-              </a>
+              ${(ethPrice)?.toFixed(2)}
             </a>
           </p>
-          <div className="flex gap-2 items-center justify-center hidden sm:flex">
+          <div className="flex items-center justify-center hidden gap-2 sm:flex">
             <PiGasPumpLight />
             <p>
               Gas:{" "}
               <a href="#" className="text text-[#0784C3]">
-                30 Gwei
+                36 Gwei
               </a>{" "}
             </p>
           </div>
         </div>
         <div className="flex items-center justify-center gap-2">
           <ul className="flex items-center justify-center gap-3">
-            <li className="rounded-lg hover:bg-gray-300 hidden sm:block">
+            <li className="hidden rounded-lg hover:bg-gray-300 sm:block">
               <button>
                 <BsBrightnessLow
                   size={30}
@@ -40,7 +57,7 @@ const Header = () => {
                 />
               </button>
             </li>
-            <li className="rounded-lg hover:bg-gray-300 hidden sm:block">
+            <li className="hidden rounded-lg hover:bg-gray-300 sm:block">
               <button>
                 <FaEthereum
                   size={30}
@@ -59,3 +76,4 @@ const Header = () => {
 };
 
 export default Header;
+

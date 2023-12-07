@@ -31,8 +31,8 @@ function Transaction() {
                         <div className="w-full divide-y">
                             <p className="py-6">{info.transactionHash}</p>
                             <p className="py-6 text-[#357BAD]">
-                                <Link to={`/block/${info.blockNumber}`}>
-                                    {info.blockNumber}
+                                <Link to={`/block/${info?.blockNumber}`}>
+                                    {info?.blockNumber}
                                 </Link>
                                 <span className="p-2 ml-3 text-xs text-gray-500 bg-gray-100 rounded-md">
                                     {info.confirmations} Block Confirmations
