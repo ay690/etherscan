@@ -1,6 +1,8 @@
 # Etherscan clone
 
-https://youtu.be/qi0HoCDhCbk
+Demo:- https://etherscan-assign.netlify.app/
+
+Video:- https://youtu.be/qi0HoCDhCbk
 
 # Snippets
 
